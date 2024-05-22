@@ -11,7 +11,7 @@ variable "project_id" {
 variable "region" {
   description = "La región para desplegar los recursos"
   type        = string
-  default     = "us-central1"
+  default     = "europe-west4" ## "us-central1"
 }
 
 variable "instance_name" {
