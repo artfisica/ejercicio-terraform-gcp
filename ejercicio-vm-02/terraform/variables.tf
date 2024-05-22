@@ -17,7 +17,7 @@ variable "region" {
 variable "instance_name" {
   description = "Nombre de la instancia de VM"
   type        = string
-  default     = "terraform-instance"
+  default     = "terraform-instance-server"
 }
 
 variable "machine_type" {
