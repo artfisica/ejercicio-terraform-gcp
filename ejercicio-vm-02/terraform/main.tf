@@ -10,10 +10,25 @@ resource "google_compute_subnetwork" "subnetwork" {
   region        = var.region
 }
 
+resource "google_compute_firewall" "default-allow-http" {
+  name    = "default-allow-http"
+  network = google_compute_network.vpc_network.name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80"]
+  }
+
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["http-server"]
+}
+
 resource "google_compute_instance" "default" {
   name         = var.instance_name
   machine_type = var.machine_type
   zone         = "${var.region}-a"
+
+  tags = ["http-server"]
 
   boot_disk {
     initialize_params {
@@ -37,4 +52,3 @@ resource "google_compute_instance" "default" {
     systemctl restart nginx
   EOT
 }
-
