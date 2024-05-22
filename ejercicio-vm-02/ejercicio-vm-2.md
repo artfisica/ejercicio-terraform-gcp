@@ -1,4 +1,4 @@
-# Ejercicio Práctico: Desplegar un Clúster de Kubernetes en GCP usando Terraform y GitHub Actions
+# Ejercicio Práctico: Desplegar una Máquina Virtual en GCP usando Terraform y GitHub Actions
 
 ## Paso 1: Configuración del Repositorio de GitHub
 
