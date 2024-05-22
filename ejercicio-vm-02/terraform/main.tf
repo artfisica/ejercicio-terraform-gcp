@@ -48,7 +48,7 @@ resource "google_compute_instance" "default" {
     #!/bin/bash
     apt-get update
     apt-get install -y nginx
-    echo 'Hola, GOES!' > /var/www/html/index.nginx-debian.html
+    echo 'Hola, GOES! - demo' > /var/www/html/index.nginx-debian.html
     systemctl restart nginx
   EOT
 }
