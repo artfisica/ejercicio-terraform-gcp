@@ -23,12 +23,23 @@ jobs:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         credentials_json: ${{ secrets.GCP_CREDENTIALS }}
 
-    - name: Initialize Terraform
+    - name: Terraform Init
       run: terraform -chdir=ejercicio-vm-02/terraform init
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+        GOOGLE_APPLICATION_CREDENTIALS: /home/runner/gcloud.json
+        TF_VAR_credentials_file_path: /home/runner/gcloud.json
+        TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
+  
+    - name: Terraform Plan
+      run: terraform -chdir=ejercicio-vm-02/terraform plan -out=tfplan
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: /home/runner/gcloud.json
+        TF_VAR_credentials_file_path: /home/runner/gcloud.json
+        TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
 
     - name: Apply Terraform Destroy
       run: terraform -chdir=ejercicio-vm-02/terraform destroy -auto-approve
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+        GOOGLE_APPLICATION_CREDENTIALS: /home/runner/gcloud.json
+        TF_VAR_credentials_file_path: /home/runner/gcloud.json
+        TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
