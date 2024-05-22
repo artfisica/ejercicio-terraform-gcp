@@ -46,44 +46,9 @@ resource "google_compute_instance" "default" {
 
   metadata_startup_script = <<-EOT
     #!/bin/bash
-
-    # Update and install nginx
     apt-get update
     apt-get install -y nginx
-
-    # Create a custom HTML page
-    cat <<EOF > /var/www/html/index.nginx-debian.html
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>GOES Demo</title>
-        <style>
-            body { font-family: Arial, sans-serif; background-color: #f0f0f0; color: #333; text-align: center; margin-top: 50px; }
-            h1 { color: #007BFF; }
-            p { font-size: 1.2em; }
-        </style>
-    </head>
-    <body>
-        <h1>Welcome to the GOES Demo Server!</h1>
-        <p>Hola, GOES! - demo</p>
-        <p>This is a custom Nginx server setup with Terraform.</p>
-    </body>
-    </html>
-    EOF
-
-    # Install monitoring tools
-    apt-get install -y htop curl
-
-    # Set up a basic cron job for server health checks
-    echo "* * * * * root curl -fsS --retry 3 http://localhost || echo 'Nginx server is down!' | mail -s 'Server Alert' root@localhost" > /etc/cron.d/nginx-monitor
-
-    # Restart nginx to apply changes
+    echo 'Hola, GOES! - demo' > /var/www/html/index.nginx-debian.html
     systemctl restart nginx
-
-    # Enable and start the cron service
-    systemctl enable cron
-    systemctl start cron
   EOT
 }
