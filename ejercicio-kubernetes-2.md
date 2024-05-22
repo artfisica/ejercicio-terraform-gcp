@@ -208,22 +208,22 @@
                GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
                GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
              run: |
-               echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > $HOME/gcloud.json
-               gcloud auth activate-service-account --key-file=$HOME/gcloud.json
+               echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > /home/runner/gcloud.json
+               gcloud auth activate-service-account --key-file=/home/runner/gcloud.json
                gcloud config set project $GCP_PROJECT_ID
 
            - name: 'Initialize Terraform'
              run: terraform -chdir=terraform init
              env:
                GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-               TF_VAR_credentials_file_path: $HOME/gcloud.json
+               TF_VAR_credentials_file_path: /home/runner/gcloud.json
                TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
 
            - name: 'Terraform Plan'
              run: terraform -chdir=terraform plan -out=plan.tfplan
              env:
                GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-               TF_VAR_credentials_file_path: $HOME/gcloud.json
+               TF_VAR_credentials_file_path: /home/runner/gcloud.json
                TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
      ```
 
@@ -257,22 +257,22 @@
                GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
                GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
              run: |
-               echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > $HOME/gcloud.json
-               gcloud auth activate-service-account --key-file=$HOME/gcloud.json
+               echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > /home/runner/gcloud.json
+               gcloud auth activate-service-account --key-file=/home/runner/gcloud.json
                gcloud config set project $GCP_PROJECT_ID
 
            - name: 'Initialize Terraform'
              run: terraform -chdir=terraform init
              env:
                GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-               TF_VAR_credentials_file_path: $HOME/gcloud.json
+               TF_VAR_credentials_file_path: /home/runner/gcloud.json
                TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
 
            - name: 'Terraform Apply'
              run: terraform -chdir=terraform apply -auto-approve plan.tfplan
              env:
                GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-               TF_VAR_credentials_file_path: $HOME/gcloud.json
+               TF_VAR_credentials_file_path: /home/runner/gcloud.json
                TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
      ```
 
