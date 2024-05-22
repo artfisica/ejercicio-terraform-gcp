@@ -29,21 +29,21 @@ jobs:
           gcloud config set project $GCP_PROJECT_ID
 
       - name: 'Initialize Terraform'
-        run: terraform -chdir=terraform init
+        run: terraform -chdir=ejercicio-vm-02/terraform init
         env:
           GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcloud.json
           TF_VAR_credentials_file_path: $HOME/gcloud.json
           TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
 
       - name: 'Terraform Plan'
-        run: terraform -chdir=terraform plan -out=plan.tfplan
+        run: terraform -chdir=ejercicio-vm-02/terraform plan -out=plan.tfplan
         env:
           GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcloud.json
           TF_VAR_credentials_file_path: $HOME/gcloud.json
           TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
 
       - name: 'Terraform Apply'
-        run: terraform -chdir=terraform apply -auto-approve plan.tfplan
+        run: terraform -chdir=ejercicio-vm-02/terraform apply -auto-approve plan.tfplan
         env:
           GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcloud.json
           TF_VAR_credentials_file_path: $HOME/gcloud.json
