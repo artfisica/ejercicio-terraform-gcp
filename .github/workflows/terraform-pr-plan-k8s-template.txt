@@ -1,0 +1,43 @@
+name: 'Terraform Plan'
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    name: 'Terraform Plan'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout GitHub repository'
+        uses: actions/checkout@v2
+
+      - name: 'Set up Terraform'
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.1.7
+
+      - name: 'Authenticate to Google Cloud'
+        env:
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        run: |
+          echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > /home/runner/gcloud.json
+          gcloud auth activate-service-account --key-file=/home/runner/gcloud.json
+          gcloud config set project $GCP_PROJECT_ID
+
+      - name: 'Initialize Terraform'
+        run: terraform -chdir=terraform init
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: /home/runner/gcloud.json
+          TF_VAR_credentials_file_path: /home/runner/gcloud.json
+          TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: 'Terraform Plan'
+        run: terraform -chdir=terraform plan -out=tfplan
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: /home/runner/gcloud.json
+          TF_VAR_credentials_file_path: /home/runner/gcloud.json
+          TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
