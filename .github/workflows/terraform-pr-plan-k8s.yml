@@ -34,7 +34,7 @@ jobs:
         TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
 
     - name: Terraform Plan
-      run: terraform -chdir=ejercicio-kubernetes/terraform plan -out=tfplan
+      run: terraform -chdir=ejercicio-kubernetes/terraform plan -out=tfplan-k8s
       env:
         GOOGLE_APPLICATION_CREDENTIALS: /home/runner/gcloud.json
         TF_VAR_credentials_file_path: /home/runner/gcloud.json
