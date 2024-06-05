@@ -1,4 +1,4 @@
-name: Terraform Plan VM
+name: Terraform Plan K8S
 
 on:
   pull_request:
