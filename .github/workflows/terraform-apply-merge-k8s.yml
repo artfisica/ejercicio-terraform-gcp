@@ -1,9 +1,9 @@
-name: Terraform Apply VM
+name: Terraform Apply K8S
 
 on:
   push:
     branches:
-      - vm
+      - main
 
 jobs:
   terraform-apply:
