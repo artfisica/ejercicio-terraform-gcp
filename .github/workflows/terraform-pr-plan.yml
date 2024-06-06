@@ -3,7 +3,7 @@ name: Terraform Plan VM
 on:
   pull_request:
     branches:
-      - main
+      - vm #main
   
   workflow_dispatch:
 
