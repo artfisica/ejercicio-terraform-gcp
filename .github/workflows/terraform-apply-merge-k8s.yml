@@ -3,7 +3,7 @@ name: Terraform Apply K8S
 on:
   push:
     branches:
-      - k8s
+      - main #k8s
 
 jobs:
   terraform-apply:

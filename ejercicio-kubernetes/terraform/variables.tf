@@ -23,13 +23,13 @@ variable "cluster_name" {
 variable "node_count" {
   description = "Número de nodos del clúster"
   type        = number
-  default     = 2
+  default     = 3
 }
 
 variable "machine_type" {
   description = "Tipo de máquina para los nodos del clúster"
   type        = string
-  default     = "e2-medium"
+  default     = "e2-micro" # "e2-medium"
 }
 
 variable "network_name" {
