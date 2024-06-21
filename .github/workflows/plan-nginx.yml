@@ -19,6 +19,11 @@ jobs:
         service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}
         project_id: ${{ secrets.GCP_PROJECT_ID }}
 
+    - name: 'Install gke-gcloud-auth-plugin'
+      run: |
+        sudo apt-get update && sudo apt-get install -y google-cloud-sdk-gke-gcloud-auth-plugin
+        gcloud components install gke-gcloud-auth-plugin
+
     - name: 'Authenticate to Google Cloud'
       run: |
         echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}" | base64 --decode > gcloud.json
@@ -36,4 +41,3 @@ jobs:
     - name: 'Dry-run Nginx Service'
       run: |
         kubectl apply -f ejercicio-kubernetes/helm/nginx-service.yaml --dry-run=client
-        
