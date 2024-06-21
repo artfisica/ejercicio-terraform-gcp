@@ -1,0 +1,39 @@
+name: 'Deploy Nginx to Kubernetes'
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: 'Deploy Nginx'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 'Checkout GitHub repository'
+      uses: actions/checkout@v4
+
+    - name: 'Set up Google Cloud SDK'
+      uses: google-github-actions/setup-gcloud@v0.2.1
+      with:
+        service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+    - name: 'Authenticate to Google Cloud'
+      run: |
+        echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}" | base64 --decode > /home/runner/gcloud.json
+        gcloud auth activate-service-account --key-file=/home/runner/gcloud.json
+        gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+
+    - name: 'Get GKE credentials'
+      run: |
+        gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --region ${{ secrets.GCP_REGION }}
+
+    - name: 'Apply Nginx Deployment'
+      run: |
+        kubectl apply -f nginx-deployment.yaml
+
+    - name: 'Apply Nginx Service'
+      run: |
+        kubectl apply -f nginx-service.yaml
