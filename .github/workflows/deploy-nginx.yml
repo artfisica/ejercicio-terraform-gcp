@@ -37,7 +37,7 @@ jobs:
 
     - name: 'Create Website ConfigMap'
       run: |
-        kubectl create configmap website-config --from-file=site
+        kubectl create configmap website-config --from-file=ejercicio-kubernetes/site
 
     - name: 'Apply Nginx Deployment'
       run: |
