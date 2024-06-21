@@ -31,3 +31,10 @@ spec:
             port: 80
           initialDelaySeconds: 15
           periodSeconds: 20
+        volumeMounts:
+        - name: website-content
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: website-content
+        configMap:
+          name: website-config

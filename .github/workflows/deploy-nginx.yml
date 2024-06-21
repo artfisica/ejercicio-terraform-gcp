@@ -35,6 +35,10 @@ jobs:
       run: |
         gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --region ${{ secrets.GCP_REGION }}
 
+    - name: 'Create Website ConfigMap'
+      run: |
+        kubectl create configmap website-config --from-file=site
+
     - name: 'Apply Nginx Deployment'
       run: |
         kubectl apply -f ejercicio-kubernetes/helm/nginx-deployment.yaml
