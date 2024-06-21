@@ -7,7 +7,6 @@ provider "google" {
 terraform {
   backend "gcs" {
     bucket  = "terraform-state-bucket-goes"
-    prefix  = "terraform/state"
+    prefix  = "terraform/state/virtual-machine"
   }
 }
-
