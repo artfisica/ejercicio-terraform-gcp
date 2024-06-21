@@ -32,6 +32,12 @@ variable "machine_type" {
   default     = "e2-micro" # "e2-medium"
 }
 
+variable "disk_size_gb" {
+  description = "Tamaño del disco en GB para cada nodo"
+  type        = number
+  default     = 10
+}
+
 variable "network_name" {
   description = "El nombre de la red VPC a crear"
   type        = string
