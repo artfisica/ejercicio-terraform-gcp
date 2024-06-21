@@ -32,8 +32,8 @@ jobs:
 
     - name: 'Apply Nginx Deployment'
       run: |
-        kubectl apply -f nginx-deployment.yaml
+        kubectl apply -f ejercicio-kubernetes/helm/nginx-deployment.yaml
 
     - name: 'Apply Nginx Service'
       run: |
-        kubectl apply -f nginx-service.yaml
+        kubectl apply -f ejercicio-kubernetes/helm/nginx-service.yaml

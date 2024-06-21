@@ -31,9 +31,9 @@ jobs:
 
     - name: 'Dry-run Nginx Deployment'
       run: |
-        kubectl apply -f nginx-deployment.yaml --dry-run=client
+        kubectl apply -f ejercicio-kubernetes/helm/nginx-deployment.yaml --dry-run=client
 
     - name: 'Dry-run Nginx Service'
       run: |
-        kubectl apply -f nginx-service.yaml --dry-run=client
+        kubectl apply -f ejercicio-kubernetes/helm/nginx-service.yaml --dry-run=client
         
