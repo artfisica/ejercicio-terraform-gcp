@@ -29,7 +29,7 @@ variable "machine_type" {
 variable "network_name" {
   description = "El nombre de la red VPC a crear"
   type        = string
-  default     = "terraform-network"
+  default     = "terraform-vm-network"
 }
 
 variable "subnet_name" {
