@@ -29,7 +29,7 @@ variable "node_count" {
 variable "machine_type" {
   description = "Tipo de máquina para los nodos del clúster"
   type        = string
-  default     = "e2-micro" # "e2-medium"
+  default     = "e2-medium" #"e2-micro" 
 }
 
 variable "disk_size_gb" {
