@@ -3,7 +3,7 @@ name: Terraform Apply VM
 on:
   push:
     branches:
-      - vm # main
+      - main #vm
 
 jobs:
   terraform-apply:
