@@ -35,7 +35,7 @@ variable "network_name" {
 variable "subnet_name" {
   description = "El nombre de la subred a crear"
   type        = string
-  default     = "terraform-subnet"
+  default     = "terraform-vm-subnet"
 }
 
 variable "subnet_cidr" {
