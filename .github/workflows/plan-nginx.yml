@@ -36,7 +36,7 @@ jobs:
 
     - name: 'Dry-run Website ConfigMap'
       run: |
-        kubectl create configmap website-config --from-file=site --dry-run=client -o yaml
+        kubectl create configmap website-config --from-file=ejercicio-kubernetes/site --dry-run=client -o yaml
 
     - name: 'Dry-run Nginx Deployment'
       run: |
